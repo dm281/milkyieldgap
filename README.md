@@ -2,7 +2,7 @@
 
 **Predictive Dairy Performance Analytics for Farm Consulting**
 
-D. Darren McGee  
+D. Darren McGee 
 Mississippi State University — Master of Applied Data Science Capstone (DSCI 8413, Fall 2026)
 
 ## Research objective
