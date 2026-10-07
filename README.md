@@ -11,9 +11,9 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
 
 ## Data sources
 
-- Primary: Elanco EKS Dairy Data Access System, table `EKS_Dairy_36_month_2026-09-01_090118_Lactations` (4,803,135 cow-lactation rows; 250 columns; 320 farms after dropping missing HerdCode; fresh dates 29 Aug 2023–29 Aug 2026).
+- Primary: Elanco EKS Dairy Data Access System, table `EKS_Dairy_36_month_2026-09-01_090118_Lactations` (4,803,135 cow-lactation rows; 250 columns; 320 coded farms after dropping 10,875 rows with a missing herd code; fresh dates 29 Aug 2023–29 Aug 2026).
 - Farm names and herd codes are **not** in this repository. Analysis uses a random `FarmID` from a private crosswalk stored only in the Elanco workspace.
-- Later (not this week): optional herd-level feed-delivery and milk-shipment files for a subset of farms.
+- Later (not this week): optional herd-level feed-delivery and milk-shipment files for the DDAS+ subset.
 
 ## Repository layout
 
@@ -24,23 +24,26 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
     │   ├── raw/          # empty on GitHub — raw extract stays at Elanco
     │   └── processed/    # empty on GitHub — processed tables stay at Elanco
     ├── notebooks/
-    │   └── 01_data_preparation.py
+    │   ├── 01_data_preparation.py
+    │   └── 02_exploratory_analysis.py
     ├── src/
     │   └── preprocessing.py
     └── figures/
+        ├── fig4_lactation_curve.png
+        └── fig5_event_rates.png
 
 ## Status
 
 - Week 1: research design, data description, governance.
-- Week 2: data assessment, cleaning rules, feature design, temporal holdout. Quality counts were produced in JMP on the local analysis table `lactations_with_farmid`. The scripts here record those rules so they can be reproduced without putting farm rows on GitHub.
+- Week 2: data assessment, cleaning rules, feature design, temporal holdout.
+- Week 3: exploratory summaries from JMP on the local table `lactations_with_farmid`. The notebook records those counts and the two manuscript figures. The signed gap has not been fit. No accuracy is reported.
 
-## How to run (local Elanco workspace only)
+## How to run (no farm rows required)
 
-    export YIELDGAP_DATA=/path/to/lactations_with_farmid.csv
-    python notebooks/01_data_preparation.py
+    python notebooks/02_exploratory_analysis.py
 
-If `YIELDGAP_DATA` is not set, the script prints the documented quality counts from the JMP audit and exits without reading a file.
+The script prints the Section IV counts. It does not read the extract.
 
 ## License / use
 
-Course repository. Elanco-housed records remain internal. No raw extracts, `AccountName`, `HerdCode`, or `herd_crosswalk`.
+Course repository. Elanco-housed records remain internal. Do not commit raw extracts, `AccountName`, `HerdCode`, or `herd_crosswalk`.
