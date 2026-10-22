@@ -26,7 +26,8 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
     ├── notebooks/
     │   ├── 01_data_preparation.py
     │   ├── 02_exploratory_analysis.py
-    │   └── 03_statistics_visualization.py
+    │   ├── 03_statistics_visualization.py
+    │   └── 04_baseline.py
     ├── src/
     │   └── preprocessing.py
     └── figures/
@@ -41,14 +42,16 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
 - Week 1: research design, data description, governance.
 - Week 2: data assessment, cleaning rules, feature design, temporal holdout.
 - Week 3: exploratory summaries from JMP on the local table `lactations_with_farmid`. The notebook records those counts and the two manuscript figures. The signed gap has not been fit. No accuracy is reported.
-- Week 4: visualization and interpretation. Figures 6–8 (farm size, Milk1 distribution, Milk1 by month of fresh date) are in `figures/`. The notebook records the Section V counts. The signed gap has not been fit. No accuracy is reported.
+- Week 4: visualization and interpretation. Figures 6–8 are in `figures/`. The notebook records the Section V counts.
+- Week 5: baseline and experimental design. Expected milk is the mean within lactation group, month of fresh date, and 10-day DIM bin, fit through 28 Feb 2026 and scored on later fresh dates. Holdout result: n = 1,456,157 slots; MAE = 17.03 lb; RMSE = 22.00 lb; mean signed error = +1.52 lb. The notebook records that result. No advanced model has been fit.
 
 ## How to run (no farm rows required)
 
     python notebooks/02_exploratory_analysis.py
     python notebooks/03_statistics_visualization.py
+    python notebooks/04_baseline.py
 
-The scripts print the Section IV and Section V counts. They do not read the extract.
+The scripts print the recorded counts. They do not read the extract.
 
 ## License / use
 
