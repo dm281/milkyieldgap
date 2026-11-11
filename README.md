@@ -1,34 +1,18 @@
-# YieldGap
-
-**Predictive Dairy Performance Analytics for Farm Consulting**
-
-D. Darren McGee  
-Mississippi State University — Master of Applied Data Science Capstone (DSCI 8413, Fall 2026)
-
-## Research objective
-
-Estimate signed milk-production gaps at cow-lactation and herd level from an Elanco Knowledge Solutions Dairy Data Access System extract, and rank only those bottleneck classes the records can support.
-
-## Data sources
-
-- Primary: Elanco EKS Dairy Data Access System, table `EKS_Dairy_36_month_2026-09-01_090118_Lactations` (4,803,135 cow-lactation rows; 250 columns; 320 coded farms after dropping 10,875 rows with a missing herd code; fresh dates 29 Aug 2023–29 Aug 2026).
-- Farm names and herd codes are **not** in this repository. Analysis uses a random `FarmID` from a private crosswalk stored only in the Elanco workspace.
-- Later (not this week): optional herd-level feed-delivery and milk-shipment files for the DDAS+ subset.
-
 ## Repository layout
 
     milkyieldgap/
     ├── README.md
     ├── data/
     │   ├── README.md
-    │   ├── raw/          # empty on GitHub — raw extract stays at Elanco
-    │   └── processed/    # empty on GitHub — processed tables stay at Elanco
+    │   ├── raw/
+    │   └── processed/
     ├── notebooks/
     │   ├── 01_data_preparation.py
     │   ├── 02_exploratory_analysis.py
     │   ├── 03_statistics_visualization.py
     │   ├── 04_baseline.py
-    │   └── 05_models.py
+    │   ├── 05_models.py
+    │   └── 06_evaluation.py
     ├── src/
     │   └── preprocessing.py
     └── figures/
@@ -36,7 +20,8 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
         ├── fig5_event_rates.png
         ├── fig6_farm_size.png
         ├── fig7_milk1_dist.png
-        └── fig8_milk1_by_month.png
+        ├── fig8_milk1_by_month.png
+        └── fig9_mae_by_lactgrp.png
 
 ## Status
 
@@ -44,8 +29,9 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
 - Week 2: data assessment, cleaning rules, feature design, temporal holdout.
 - Week 3: exploratory summaries from JMP on the local table `lactations_with_farmid`.
 - Week 4: visualization and interpretation. Figures 6–8 are in `figures/`.
-- Week 5: baseline and experimental design. Stratified mean within lactation group, month of fresh date, and 10-day DIM bin. Holdout: n = 1,456,157; MAE = 17.03 lb; RMSE = 22.00 lb; mean signed error = +1.52 lb.
-- Week 6: candidate models on the same split and features. Holdout MAE: linear regression 19.49 lb; Wilmink curve 17.95 lb; decision tree (18 splits) 17.22 lb. None beat the baseline. No model is declared best. The notebook records the specifications and counts.
+- Week 5: baseline. Stratified mean within lactation group, month, and 10-day DIM bin.
+- Week 6: candidate models (linear, Wilmink, decision tree). None beat the baseline on holdout MAE.
+- Week 7: evaluation and validation. Same 1,459,739 holdout slots. MAE: baseline 17.00 lb, tree 17.22, Wilmink 17.88, linear 19.49. R²: 0.333, 0.322, 0.272, 0.153. Baseline error rises with parity (14.01 / 17.47 / 19.56 lb). No model is declared best. Figure 9 is in `figures/`.
 
 ## How to run (no farm rows required)
 
@@ -53,9 +39,4 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
     python notebooks/03_statistics_visualization.py
     python notebooks/04_baseline.py
     python notebooks/05_models.py
-
-The scripts print the recorded counts. They do not read the extract.
-
-## License / use
-
-Course repository. Elanco-housed records remain internal. Do not commit raw extracts, `AccountName`, `HerdCode`, or `herd_crosswalk`.
+    python notebooks/06_evaluation.py
