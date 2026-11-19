@@ -1,0 +1,5 @@
+Model,N,MAE_lb,RMSE_lb,R2
+Stratified mean (baseline),1459739,17.00,21.95,0.333
+Decision tree (18 splits),1459739,17.22,22.13,0.322
+Wilmink curve,1459739,17.88,22.93,0.272
+Linear regression,1459739,19.49,24.74,0.153
