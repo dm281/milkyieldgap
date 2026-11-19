@@ -19,6 +19,8 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
 
     milkyieldgap/
     ├── README.md
+    ├── requirements.txt
+    ├── CITATION.cff
     ├── data/
     │   ├── README.md
     │   ├── raw/          # empty on GitHub — raw extract stays at Elanco
@@ -39,7 +41,8 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
         ├── fig6_farm_size.png
         ├── fig7_milk1_dist.png
         ├── fig8_milk1_by_month.png
-        └── fig9_mae_by_lactgrp.png
+        ├── fig9_mae_by_lactgrp.png
+        └── fig10_tree_split.png
 
 ## Status
 
@@ -50,7 +53,8 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
 - Week 5: baseline. Stratified mean within lactation group, month, and 10-day DIM bin.
 - Week 6: candidate models (linear, Wilmink, decision tree). None beat the baseline on holdout MAE.
 - Week 7: evaluation and validation. Same 1,459,739 holdout slots. MAE: baseline 17.00 lb, tree 17.22, Wilmink 17.88, linear 19.49. R²: 0.333, 0.322, 0.272, 0.153. Baseline error rises with parity (14.01 / 17.47 / 19.56 lb). No model is declared best. Figure 9 is in `figures/`.
-- Week 8: comparative results. Baseline remains lowest MAE (17.00 lb). Tree within 0.22 lb. Root split of the tree is on lactation group (65.4 lb vs 92.3 lb). Results in `data/processed/model_comparison.csv`. Script: `notebooks/07_comparison.py`.
+- Week 8: comparative results. Baseline remains lowest MAE (17.00 lb). Tree within 0.22 lb. Root split of the tree is on lactation group (65.4 lb vs 92.3 lb). Results in `data/processed/model_comparison.csv`. Script: `notebooks/07_comparison.py`. Figure 10 is in `figures/`.
+- Week 9: final manuscript locked (`2026.11.18_DDM_Capstone_Manuscript_Week9`). Tag `v1.0-capstone` marks the submission state. Baseline remains the preferred reported model on the temporal holdout.
 
 ## How to run (no farm rows required)
 
