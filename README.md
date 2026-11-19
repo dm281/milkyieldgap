@@ -22,14 +22,15 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
     ├── data/
     │   ├── README.md
     │   ├── raw/          # empty on GitHub — raw extract stays at Elanco
-    │   └── processed/    # empty on GitHub — processed tables stay at Elanco
+    │   └── processed/    # model_comparison.csv is committed; other processed tables stay at Elanco
     ├── notebooks/
     │   ├── 01_data_preparation.py
     │   ├── 02_exploratory_analysis.py
     │   ├── 03_statistics_visualization.py
     │   ├── 04_baseline.py
     │   ├── 05_models.py
-    │   └── 06_evaluation.py
+    │   ├── 06_evaluation.py
+    │   └── 07_comparison.py
     ├── src/
     │   └── preprocessing.py
     └── figures/
@@ -49,6 +50,7 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
 - Week 5: baseline. Stratified mean within lactation group, month, and 10-day DIM bin.
 - Week 6: candidate models (linear, Wilmink, decision tree). None beat the baseline on holdout MAE.
 - Week 7: evaluation and validation. Same 1,459,739 holdout slots. MAE: baseline 17.00 lb, tree 17.22, Wilmink 17.88, linear 19.49. R²: 0.333, 0.322, 0.272, 0.153. Baseline error rises with parity (14.01 / 17.47 / 19.56 lb). No model is declared best. Figure 9 is in `figures/`.
+- Week 8: comparative results. Baseline remains lowest MAE (17.00 lb). Tree within 0.22 lb. Root split of the tree is on lactation group (65.4 lb vs 92.3 lb). Results in `data/processed/model_comparison.csv`. Script: `notebooks/07_comparison.py`.
 
 ## How to run (no farm rows required)
 
@@ -57,6 +59,7 @@ Estimate signed milk-production gaps at cow-lactation and herd level from an Ela
     python notebooks/04_baseline.py
     python notebooks/05_models.py
     python notebooks/06_evaluation.py
+    python notebooks/07_comparison.py
 
 The scripts print the recorded counts. They do not read the extract.
 
