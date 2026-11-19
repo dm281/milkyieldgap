@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Predictive Dairy Performance Analytics for Farm Consulting"
+authors:
+  - family-names: McGee
+    given-names: D. Darren
+    affiliation: Mississippi State University
+version: 1.0-capstone
+date-released: 2026-11-18
+repository-code: "https://github.com/dm281/milkyieldgap"
+license: MIT
+keywords:
+  - dairy
+  - milk-yield
+  - residual
+  - farm-consulting
+  - predictive-analytics
+abstract: "Estimates signed milk-production gaps at the cow-lactation and herd level from an Elanco Knowledge Solutions Dairy Data Access System extract and compares a stratified-mean baseline against a linear model and a tree ensemble on a temporal holdout."
